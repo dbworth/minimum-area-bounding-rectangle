@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # Test program to find minimum-area bounding rectangle
-# 
+#
 # Un-comment one of the arrays to test with a rectangle or 5-point polygon
 # Some solutions to this problem will fail with simple shapes!
 #
@@ -46,18 +46,28 @@ if __name__ == "__main__":
     #
 
     # Square
-    #xy_points = 10*array([(x,y) for x in arange(10) for y in arange(10)])
+    # xy_points = 10*array([(x,y) for x in arange(10) for y in arange(10)])
 
     # Random points
-    #xy_points = 100*random.random((32,2))
-    
+    # xy_points = 100*random.random((32,2))
+
     # A rectangle
-    #xy_points = array([ [0,0], [1,0], [1,2], [0,2], [0,0] ])
+    # xy_points = array([ [0,0], [1,0], [1,2], [0,2], [0,0] ])
 
     # A rectangle, with 5th outlier
-    xy_points = array([ [0,0], [1,0], [1.5,1], [1,2], [0,2], [0,0] ])
+    v = [
+        [282.15683092396523, 223.11512640953208],
+        [282.6740563777786, 200.61399296154428],
+        [248.98051148730354, 199.7099293962484],
+        [248.46328600395807, 217.4898437932211],
+        [229.3259436222214, 273.2403900872115],
+        [261.3200334037592, 284.18959062917554],
+        [282.15683092396523, 223.11512640953208],
+    ]
 
-    #--------------------------------------------------------------------------#
+    xy_points = array(v)
+
+    # --------------------------------------------------------------------------#
 
     # Find convex hull
     hull_points = qhull2D(xy_points)
@@ -65,15 +75,15 @@ if __name__ == "__main__":
     # Reverse order of points, to match output from other qhull implementations
     hull_points = hull_points[::-1]
 
-    print 'Convex hull points: \n', hull_points, "\n"
+    print("Convex hull points: \n", hull_points, "\n")
 
     # Find minimum area bounding rectangle
-    (rot_angle, area, width, height, center_point, corner_points) = minBoundingRect(hull_points)
+    (rot_angle, area, width, height, center_point, corner_points) = minBoundingRect(
+        hull_points
+    )
 
-    print "Minimum area bounding box:"
-    print "Rotation angle:", rot_angle, "rad  (", rot_angle*(180/math.pi), "deg )"
-    print "Width:", width, " Height:", height, "  Area:", area
-    print "Center point: \n", center_point # numpy array
-    print "Corner points: \n", corner_points, "\n"  # numpy array
-
-
+    print("Minimum area bounding box:")
+    print("Rotation angle:", rot_angle, "rad  (", rot_angle * (180 / math.pi), "deg )")
+    print("Width:", width, " Height:", height, "  Area:", area)
+    print("Center point: \n", center_point)  # numpy array
+    print("Corner points: \n", corner_points, "\n")  # numpy array
